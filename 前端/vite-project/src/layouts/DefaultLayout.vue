@@ -5,7 +5,7 @@
             <nav>
                 <ul class="flex gap-3">
                     <li><router-link to="/">首頁</router-link></li>
-                    <li><router-link to="/login">登入</router-link></li>
+                    <li><button @click="logout">登出</button></li>
                 </ul>
             </nav>
         </div>
@@ -14,3 +14,16 @@
         <router-view></router-view>
     </main>
 </template>
+
+
+<script setup lang="ts">
+import {useRouter} from 'vue-router'
+const router = useRouter()
+function logout() {
+    const confirm = window.confirm('確定要登出嗎?')
+    if(!confirm) return
+    alert('登出成功')
+    localStorage.removeItem('token')
+    router.push('/login')
+}
+</script>
